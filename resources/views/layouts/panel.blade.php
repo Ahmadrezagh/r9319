@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')</title>
+    <!-- jQuery -->
+    <script src="{{URL::to('/').'/plugins/jquery/jquery.min.js'}}"></script>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -38,6 +40,9 @@
     <script src="https://cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
     <!-- Include this in your blade layout -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Select2 JS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 <body style="font-family: IranYekan" class="hold-transition sidebar-mini layout-fixed">
 @include('sweet::alert')
@@ -248,11 +253,56 @@
                                                             <p>کاربران</p>
                                                         </a>
                                                     </li>
+                                                    <li class="nav-item">
+                                                        <a href="{{route('userRoles.index')}}" class="nav-link @yield('userRolesَ')">
+                                                            <p>نقش کاربران</p>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         @endif
-
-                                        @if ((Auth::user()->isAdmin() && Auth::user()->can('Setting')) || Auth::user()->isSuperAdmin() )
+                    @if ((Auth::user()->isAdmin() && Auth::user()->can('College')) || Auth::user()->isSuperAdmin() )
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link @yield('College')">
+                                <i class="fas fa-school"></i>
+                                <p>
+                                    مدیریت مراکز آموزشی
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('colleges.index')}}" class="nav-link @yield('Colleges')">
+                                        <p>مراکز آموزشی</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if ((Auth::user()->isAdmin() && Auth::user()->can('Lesson')) || Auth::user()->isSuperAdmin() )
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link @yield('Lesson')">
+                                <i class="fas fa-book-open"></i>
+                                <p>
+                                    مدیریت دروس
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('lessons.index')}}" class="nav-link @yield('Lessons')">
+                                        <p>لیست دروس ارایه شده</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('studentLessons.index')}}" class="nav-link @yield('StudentLessons')">
+                                        <p>لیست دانشجویان هر درس</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if ((Auth::user()->isAdmin() && Auth::user()->can('Setting')) || Auth::user()->isSuperAdmin() )
                                             <li class="nav-item has-treeview ">
                                                 <a href="#" class="nav-link @yield('Setting')">
                                                     <i class="fas fa-cogs"></i>

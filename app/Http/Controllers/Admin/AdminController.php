@@ -32,7 +32,7 @@ class AdminController extends Controller
     public function index()
     {
         $admins = User::Admins()->latest()->get();
-        $roles = Role::all();
+        $roles = Role::query()->where('type',1)->get();
         return view('admin.admins.index',compact('admins','roles'));
     }
 

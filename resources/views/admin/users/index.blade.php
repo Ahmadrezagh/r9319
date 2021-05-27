@@ -67,6 +67,17 @@
                                                 <input type="password" name="re_password" class="form-control" id="exampleInputPassword1" placeholder="تکرار رمز عبور" required>
                                             </div>
                                             <div class="form-group">
+                                                <label for="exampleFormControlSelect1">انتخاب نقش</label>
+                                                <select class="form-control" name="role" id="exampleFormControlSelect1">
+                                                    <option value="0"  selected disabled>انتخاب نقش</option>
+                                                    @foreach($roles as $role)
+                                                        <option value="{{$role->name}}"
+
+                                                        >{{$role->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="exampleInputFile">تصویر پروفایل</label>
                                                 <div class="input-group">
                                                     <div class="custom-file">
@@ -99,6 +110,7 @@
                                 <th>تصویر کاربر</th>
                                 <th>نام</th>
                                 <th>ایمیل</th>
+                                <th>نقش</th>
                                 <th>تاریخ عضویت</th>
                                 <th>عملیات</th>
                             </tr>
@@ -113,6 +125,11 @@
                                         {{$user->name}}
                                     </td>
                                     <td>{{$user->email}}</td>
+                                    <td>
+                                        @foreach ($user->role as $r)
+                                            {{$r->name}}
+                                        @endforeach
+                                    </td>
                                     <td >
                                         <button class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="{{$user->created_at}}">
                                             {{\Morilog\Jalali\Jalalian::forge($user->created_at)->format('%A, %d %B %Y')}}
@@ -193,6 +210,21 @@
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">تکرار رمز عبور</label>
                                                             <input type="password" name="re_password" class="form-control" id="exampleInputPassword1" placeholder="Password" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlSelect1">انتخاب نقش</label>
+                                                            <select class="form-control" name="role" id="exampleFormControlSelect1">
+                                                                <option value="0"  selected disabled>انتخاب نقش</option>
+                                                                @foreach($roles as $role)
+                                                                    <option value="{{$role->name}}"
+                                                                            @if($user->role)
+                                                                            @if($role->name == $user->role->pluck('name')->first())
+                                                                            selected
+                                                                            @endif
+                                                                            @endif
+                                                                    >{{$role->name}}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputFile">تصویر پروفایل</label>

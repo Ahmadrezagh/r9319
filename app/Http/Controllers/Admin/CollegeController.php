@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Models\Permission;
+use App\Models\College;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RoleController extends Controller
+class CollegeController extends Controller
 {
     public function __construct()
     {
 
         $this->middleware(function ($request, $next) {
-            if ((Auth::user()->isAdmin() && Auth::user()->can('Admin')) || Auth::user()->isSuperAdmin())
+            if ((Auth::user()->isAdmin() && Auth::user()->can('College')) || Auth::user()->isSuperAdmin())
             {
                 return $next($request);
             }else{
@@ -30,10 +30,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::query()->where('type',1)->get();
-        $permissions = Permission::query()->where('type',1)->get();
-        return view('admin.admins.roles',compact('roles','permissions'));
-
+        $colleges = College::all();
+        $masters = User::query()->whereHas('role',function ($query){
+            return $query->where('name', '=','استاد');
+        })->get();
+        return view('admin.colleges.index',compact('colleges','masters'));
     }
 
     /**
@@ -57,17 +58,10 @@ class RoleController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        dd(Permission::whereIn('name', $request->permissions )->pluck('id'));
-        $role = new Role();
-        try {
-            $role->name = $request->name;
-            $role->save();
-            $role->refreshPermissions($request->permissions);
-        } catch (\Exception $exception) {
-            alert()->warning('warning', $exception->getCode());
-            return redirect()->back();
-        }
-        alert()->success('نقش با موفقیت ایجاد شد');
+        College::create([
+            'name' => $request->name
+        ]);
+        alert()->success('مرکز آموزشی با موفقیت ایجاد شد');
         return back();
     }
 
@@ -102,14 +96,20 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::findOrFail($id);
-        $validationData = $request->validate([
-
+        $request->validate([
             'name' => 'required',
         ]);
-        $role->update($request->only('name'));
-        $role->refreshPermissions($request->permissions);
-        alert()->success('نقش با موفقیت ویرایش شد');
+        $college = College::findOrFail($id);
+        $college->update([
+            'name' => $request->name
+        ]);
+        if(($request->masters))
+        {
+            $college->masters()->sync($request->masters);
+        }else{
+            $college->masters()->detach();
+        }
+        alert()->success('مرکز آموزشی با موفقیت ویرایش شد');
         return back();
     }
 
@@ -121,8 +121,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        Role::findOrFail($id)->delete();
-        alert()->success('نقش با موفقیت حذف شد');
+        College::findOrfail($id)->delete();
+        alert()->success('مرکز آموزشی با موفقیت حذف شد');
         return back();
     }
 }

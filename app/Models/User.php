@@ -92,4 +92,17 @@ class User extends Authenticatable
         return $this->profile ?? '/uploads/profiles/default/user.png';
     }
 
+    public function colleges()
+    {
+        return $this->belongsToMany(College::class,'college_master');
+    }
+
+    public function masterLesson()
+    {
+        return $this->belongsToMany(Lesson::class,'lesson_master');
+    }
+    public function studentLessons()
+    {
+        return $this->belongsToMany(Lesson::class,'lesson_student');
+    }
 }

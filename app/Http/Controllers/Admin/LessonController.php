@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Models\Permission;
+use App\Models\Lesson;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RoleController extends Controller
+class LessonController extends Controller
 {
     public function __construct()
     {
 
         $this->middleware(function ($request, $next) {
-            if ((Auth::user()->isAdmin() && Auth::user()->can('Admin')) || Auth::user()->isSuperAdmin())
+            if ((Auth::user()->isAdmin() && Auth::user()->can('Lesson')) || Auth::user()->isSuperAdmin())
             {
                 return $next($request);
             }else{
@@ -30,10 +30,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::query()->where('type',1)->get();
-        $permissions = Permission::query()->where('type',1)->get();
-        return view('admin.admins.roles',compact('roles','permissions'));
-
+        $lessons = Lesson::all();
+        $masters = User::query()->whereHas('role',function ($query){
+            return $query->where('name', '=','استاد');
+        })->get();
+        return view('admin.lessons.index',compact('lessons','masters'));
     }
 
     /**
@@ -56,18 +57,13 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'master' => 'required'
         ]);
-        dd(Permission::whereIn('name', $request->permissions )->pluck('id'));
-        $role = new Role();
-        try {
-            $role->name = $request->name;
-            $role->save();
-            $role->refreshPermissions($request->permissions);
-        } catch (\Exception $exception) {
-            alert()->warning('warning', $exception->getCode());
-            return redirect()->back();
-        }
-        alert()->success('نقش با موفقیت ایجاد شد');
+        $lesson = Lesson::create([
+            'name' => $request->name
+        ]);
+        $lesson->master()->sync([$request->master]);
+        alert()->success(' درس با موفقیت ایجاد شد');
         return back();
     }
 
@@ -102,14 +98,16 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::findOrFail($id);
-        $validationData = $request->validate([
-
+        $lesson = Lesson::findOrFail($id);
+        $request->validate([
             'name' => 'required',
+            'master' => 'required'
         ]);
-        $role->update($request->only('name'));
-        $role->refreshPermissions($request->permissions);
-        alert()->success('نقش با موفقیت ویرایش شد');
+        $lesson->update([
+            'name' => $request->name
+        ]);
+        $lesson->master()->sync([$request->master]);
+        alert()->success(' درس با موفقیت ویرایش شد');
         return back();
     }
 
@@ -121,8 +119,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        Role::findOrFail($id)->delete();
-        alert()->success('نقش با موفقیت حذف شد');
+        $lesson = Lesson::findOrFail($id);
+        $lesson->delete();
+        alert()->success(' درس با موفقیت حذف شد');
         return back();
     }
 }

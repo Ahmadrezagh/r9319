@@ -23,9 +23,13 @@ Route::middleware(['auth'])->group(function () {
         // Amin routes
         Route::resource('admin', 'Admin\AdminController');
         Route::resource('roles', 'Admin\RoleController');
+        Route::resource('userRoles', 'Admin\UserRoleController');
         Route::resource('categories', 'Admin\CategoryController');
         Route::resource('users', 'Admin\UserController');
         Route::resource('settings', 'Admin\SettingController');
+        Route::resource('colleges','Admin\CollegeController');
+        Route::resource('lessons','Admin\LessonController');
+        Route::resource('studentLessons','Admin\StudentLessonController');
 
     });
     // Default

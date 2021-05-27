@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::Users()->latest()->get();
-        return view('admin.users.index',compact('users'));
+        $roles = Role::query()->where('type',2)->get();
+        return view('admin.users.index',compact('users','roles'));
     }
 
     /**
@@ -74,7 +76,10 @@ class UserController extends Controller
             'type_id' => '3',
             'password' => Hash::make($request->password),
         ]);
-
+        if($request->role)
+        {
+            $user->refreshRoles($request->role);
+        }
         alert()->success('کاربر با موفقیت ایجاد شد');
         return back();
     }
@@ -141,6 +146,10 @@ class UserController extends Controller
             'profile' => ($request->img) ? $profile_img : User::where('id','=',$id)->pluck('profile')->first()
         ]);
         $user = User::where('id','=',$id)->first();
+        if($request->role)
+        {
+            $user->refreshRoles($request->role);
+        }
         alert()->success('کاربر با موفقیت ویرایش شد');
         return back();
     }

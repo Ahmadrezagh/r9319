@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 @section('title')
-    register
+    ثبت نام
 @endsection
 @section('content')
 

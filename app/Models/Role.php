@@ -12,7 +12,7 @@ class Role extends Model
 {
     use HasFactory,HasRoles, HasPermissions;
     use SoftDeletes;
-    protected $fillable=['name'];
+    protected $fillable=['name','type'];
     public function user()
     {
         return $this->belongsToMany( User::class );

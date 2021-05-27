@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RoleController extends Controller
+class UserRoleController extends Controller
 {
     public function __construct()
     {
@@ -30,9 +30,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::query()->where('type',1)->get();
-        $permissions = Permission::query()->where('type',1)->get();
-        return view('admin.admins.roles',compact('roles','permissions'));
+        $roles = Role::all();
+        $permissions = Permission::query()->where('type',2)->get();
+        return view('admin.users.roles',compact('roles','permissions'));
 
     }
 
@@ -57,10 +57,10 @@ class RoleController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        dd(Permission::whereIn('name', $request->permissions )->pluck('id'));
         $role = new Role();
         try {
             $role->name = $request->name;
+            $role->type = 2;
             $role->save();
             $role->refreshPermissions($request->permissions);
         } catch (\Exception $exception) {
