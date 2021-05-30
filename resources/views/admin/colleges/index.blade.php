@@ -7,7 +7,7 @@
     active
 @endsection
 @section('title')
-    مراکز آموزشی
+    دانکشده ها
 @endsection
 @section('content')
 
@@ -18,7 +18,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">مدیریت مراکز آموزشی </h1>
+                        <h1 class="m-0 text-dark">مدیریت دانکشده ها </h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -31,18 +31,18 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title" style="float: right">مراکز آموزشی</h3>
+                        <h3 class="card-title" style="float: right">دانکشده ها</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-create">ایجاد مرکز آموزشی</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-create">ایجاد دانشکده</button>
 
                         <!-- Create Modal -->
                         <div class="modal fade" id="modal-create">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" style="float:right;">ایجاد مرکز آموزشی</h4>
+                                        <h4 class="modal-title" style="float:right;">ایجاد دانشکده</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -54,7 +54,7 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">نام</label>
-                                                    <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="نام مرکز آموزشی" required>
+                                                    <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="نام دانشکده" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="js-example-basic-multiple">اساتید مرکز</label>
@@ -109,13 +109,13 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">حذف مرکز آموزشی</h4>
+                                                <h4 class="modal-title">حذف دانشکده</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <h5>آیا در حذف مرکز آموزشی `{{$college->name}}` مطمین هستید؟ </h5>
+                                                <h5>آیا در حذف دانشکده `{{$college->name}}` مطمین هستید؟ </h5>
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
@@ -140,7 +140,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">ویرایش مرکز آموزشی</h4>
+                                                <h4 class="modal-title">ویرایش دانشکده</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -154,7 +154,7 @@
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">نام</label>
-                                                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="نام مرکز آموزشی" required value="{{$college->name}}" required>
+                                                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="نام دانشکده" required value="{{$college->name}}" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="js-example-basic-multiple">اساتید مرکز</label>

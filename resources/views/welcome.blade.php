@@ -79,11 +79,10 @@
 
     <div class="content">
         <div class="title m-b-md">
-            {{setting('name')}}
         </div>
 
         <div class="links">
-            <a href="https://Ahmadrezaghanbari.ir">طراحی و توسعه : احمدرضا قنبری</a>
+
         </div>
     </div>
 </div>

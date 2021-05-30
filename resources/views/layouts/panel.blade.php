@@ -268,14 +268,14 @@
                             <a href="#" class="nav-link @yield('College')">
                                 <i class="fas fa-school"></i>
                                 <p>
-                                    مدیریت مراکز آموزشی
+                                    مدیریت دانشکده ها
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('colleges.index')}}" class="nav-link @yield('Colleges')">
-                                        <p>مراکز آموزشی</p>
+                                        <p>دانشکده ها</p>
                                     </a>
                                 </li>
                             </ul>
@@ -367,11 +367,7 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer" >
         <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-           طراحی و توسعه : <a href="https://ahmadrezaghanbari.ir">احمدرضا قنبری</a>
-        </div>
         <!-- Default to the left -->
-        <strong>  تمامی حقوق مادی و معنوی برای وبسایت <a href="{{setting('url')}}">{{setting('name')}}</a> محفوض است </strong>
     </footer>
 
     <!-- Control Sidebar -->
