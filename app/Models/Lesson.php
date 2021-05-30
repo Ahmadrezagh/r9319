@@ -19,4 +19,9 @@ class Lesson extends Model
     {
         return $this->belongsToMany(User::class,'lesson_student');
     }
+
+    public function forms()
+    {
+        return $this->morphToMany(Form::class, 'formable','formables');
+    }
 }

@@ -14,4 +14,9 @@ class College extends Model
     {
         return $this->belongsToMany(User::class,'college_master');
     }
+
+    public function forms()
+    {
+        return $this->morphToMany(Form::class, 'formable','formables');
+    }
 }

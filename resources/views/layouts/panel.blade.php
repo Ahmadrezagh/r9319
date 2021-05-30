@@ -43,6 +43,8 @@
     <!-- Select2 JS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Suggest tag -->
+    <link rel="stylesheet" href="{{url('suggesttag/css/amsify.suggestags.css')}}">
 </head>
 <body style="font-family: IranYekan" class="hold-transition sidebar-mini layout-fixed">
 @include('sweet::alert')
@@ -220,24 +222,24 @@
                                             </ul>
                                         </li>
                                         @endif
-                                        @if ((Auth::user()->isAdmin() && Auth::user()->can('Documents')) || Auth::user()->isSuperAdmin() )
-                                            <li class="nav-item has-treeview ">
-                                                <a href="#" class="nav-link @yield('Documents')">
-                                                    <i class="fas fa-clipboard-list"></i>
-                                                    <p>
-                                                        دسته بندی ها
-                                                        <i class="right fas fa-angle-left"></i>
-                                                    </p>
-                                                </a>
-                                                <ul class="nav nav-treeview">
-                                                        <li class="nav-item">
-                                                            <a href="{{route('categories.index')}}" class="nav-link @yield('Document')">
-                                                                <p>دسته بندی</p>
-                                                            </a>
-                                                        </li>
-                                                </ul>
-                                            </li>
-                                        @endif
+{{--                                        @if ((Auth::user()->isAdmin() && Auth::user()->can('Documents')) || Auth::user()->isSuperAdmin() )--}}
+{{--                                            <li class="nav-item has-treeview ">--}}
+{{--                                                <a href="#" class="nav-link @yield('Documents')">--}}
+{{--                                                    <i class="fas fa-clipboard-list"></i>--}}
+{{--                                                    <p>--}}
+{{--                                                        دسته بندی ها--}}
+{{--                                                        <i class="right fas fa-angle-left"></i>--}}
+{{--                                                    </p>--}}
+{{--                                                </a>--}}
+{{--                                                <ul class="nav nav-treeview">--}}
+{{--                                                        <li class="nav-item">--}}
+{{--                                                            <a href="{{route('categories.index')}}" class="nav-link @yield('Document')">--}}
+{{--                                                                <p>دسته بندی</p>--}}
+{{--                                                            </a>--}}
+{{--                                                        </li>--}}
+{{--                                                </ul>--}}
+{{--                                            </li>--}}
+{{--                                        @endif--}}
                                         @if ((Auth::user()->isAdmin() && Auth::user()->can('User')) || Auth::user()->isSuperAdmin() )
                                             <li class="nav-item has-treeview ">
                                                 <a href="#" class="nav-link @yield('User')">
@@ -297,6 +299,24 @@
                                 <li class="nav-item">
                                     <a href="{{route('studentLessons.index')}}" class="nav-link @yield('StudentLessons')">
                                         <p>لیست دانشجویان هر درس</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if ((Auth::user()->isAdmin() && Auth::user()->can('Form')) || Auth::user()->isSuperAdmin() )
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link @yield('Form')">
+                                <i class="fas fa-clipboard-list"></i>
+                                <p>
+                                    مدیریت فرم ها
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('forms.index')}}" class="nav-link @yield('Forms')">
+                                        <p>فرم های نظرسنجی</p>
                                     </a>
                                 </li>
                             </ul>
@@ -426,6 +446,7 @@
     });
 </script>
 <!-- Page script -->
+<script src="{{url('suggesttag/js/jquery.amsify.suggestags.js')}}"></script>
 @yield('js')
 
 </body>
