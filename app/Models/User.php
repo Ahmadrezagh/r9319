@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Services\Permission\Traits\HasPermissions;
 use App\Services\Permission\Traits\HasRoles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -104,5 +106,112 @@ class User extends Authenticatable
     public function studentLessons()
     {
         return $this->belongsToMany(Lesson::class,'lesson_student');
+    }
+
+    public function scopeStudents(Builder $query)
+    {
+        return $query->whereHas('role',function ($_query){
+            return $_query->where('name','دانشجو');
+        })->get();
+    }
+    public function scopeFinishedStudents(Builder $query)
+    {
+        return $query->whereHas('role',function ($_query){
+            return $_query->where('name','فارغ التحصیل');
+        })->get();
+    }
+    public function scopeMasters(Builder $query)
+    {
+        return $query->whereHas('role',function ($_query){
+            return $_query->where('name','استاد');
+        });
+    }
+
+    public function isMaster()
+    {
+        if($this->role()->first()->name == 'استاد')
+        {
+            return true;
+        }
+        return false;
+    }
+    public function isStudent()
+    {
+        if($this->role()->first()->name == 'دانشجو')
+        {
+            return true;
+        }
+        return false;
+    }
+    public function isFinishedStudent()
+    {
+        if($this->role()->first()->name == 'فارغ التحصیل')
+        {
+            return true;
+        }
+        return false;
+    }
+    public function CompletedForm($formId,$formType)
+    {
+        return DB::table('answerables')->where('user_id',$this->id)->where('answerable_id',$formId)->where('answerable_type',$formType)->first() ? true : false ;
+    }
+
+    public function CompletedFormAllEducation()
+    {
+        return DB::table('answerables')->where('user_id',$this->id)->where('answerable_id',1)->where('answerable_type','App\Models\AllEducation')->first() ? true : false ;
+    }
+
+    public function studentColleges()
+    {
+        $lessons = $this->studentLessons;
+        $college_ids = [];
+        foreach ($lessons as $lesson)
+        {
+             foreach ($lesson->master->first()->colleges->pluck('id') as $id)
+             {
+                 if(!in_array($id,$college_ids))
+                 {
+                     array_push($college_ids,$id);
+                 }
+             }
+        }
+        return College::whereIn('id',$college_ids)->get();
+    }
+
+    public function masterColleges()
+    {
+        $lessons = $this->masterLesson;
+        $college_ids = [];
+        foreach ($lessons as $lesson)
+        {
+            foreach ($lesson->master->first()->colleges->pluck('id') as $id)
+            {
+                if(!in_array($id,$college_ids))
+                {
+                    array_push($college_ids,$id);
+                }
+            }
+        }
+        return College::whereIn('id',$college_ids)->get();
+    }
+
+    public function vote()
+    {
+        $lessons = $this->masterLesson()->get();
+        $vote = 0;
+        foreach ($lessons as $lesson)
+        {
+            $vote += $lesson->vote();
+        }
+        if(count($lessons) > 0)
+        {
+            $vote = $vote/count($lessons);
+        }
+        return $vote;
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answerable::class);
     }
 }

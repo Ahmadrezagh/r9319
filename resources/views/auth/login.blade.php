@@ -45,9 +45,9 @@
         <p class="mb-1 text-right">
           <a href="{{ route('password.request') }}">رمز عبورم را فراموش کرده ام</a>
         </p>
-        <p class="mb-0 text-right">
-          <a href="{{URL::to('/')}}/register" class="text-center">ثبت نام در وبسایت</a>
-        </p>
+{{--        <p class="mb-0 text-right">--}}
+{{--          <a href="{{URL::to('/')}}/register" class="text-center">ثبت نام در وبسایت</a>--}}
+{{--        </p>--}}
       </div>
       <!-- /.login-card-body -->
     </div>

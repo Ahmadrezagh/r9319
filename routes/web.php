@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function (){
     return redirect('/login');
 });
-Auth::routes();
+Auth::routes([
+    'register' => false,
+]);
 // Admin Part
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
@@ -31,7 +33,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('lessons','Admin\LessonController');
         Route::resource('studentLessons','Admin\StudentLessonController');
         Route::resource('forms','Admin\FormController');
-
+        Route::resource('answers','Admin\AnswerController');
+    });
+    Route::prefix('user')->name('user.')->group(function () {
+        // User routes
+        Route::resource('lessonForms','User\LessonFormController');
+        Route::resource('educationForms','User\EducationFormController');
+        Route::resource('allEducationForms','User\AllEducationController');
     });
     // Default
     Route::get('/home', 'HomeController@index')->name('home');

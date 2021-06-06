@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answerable;
 use App\Models\College;
+use App\Models\Role;
 use App\Models\User;
+use Chartisan\PHP\Chartisan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,7 +76,36 @@ class CollegeController extends Controller
      */
     public function show($id)
     {
-        //
+        $college = College::findOrFail($id);
+        $roles_name = Role::where('type',2)->pluck('name')->toArray();
+        $votes = [];
+        $roles = Role::all();
+        foreach ($roles as $role)
+        {
+            $ids = $role->user()->pluck('id');
+            $answers = Answerable::query()->whereIn('user_id',$ids)
+                ->where('answerable_id',$id)
+                ->where('answerable_type',get_class($college))
+                ->get();
+
+            $v = 0;
+            foreach ($answers as $answer)
+            {
+                $v += $answer->answer->value;
+            }
+            if(count($answers)>0)
+            {
+                $v = $v / count($answers);
+            }
+            array_push($votes,$v);
+        }
+        $chart = Chartisan::build()
+            ->labels($roles_name)
+            ->dataset('نظر سنجی دانشکده', $votes)
+            ->toJSON();
+
+
+        return view('admin.colleges.result',compact('college','chart','chart3'));
     }
 
     /**

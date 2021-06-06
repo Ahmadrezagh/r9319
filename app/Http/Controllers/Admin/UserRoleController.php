@@ -103,11 +103,11 @@ class UserRoleController extends Controller
     public function update(Request $request, $id)
     {
         $role = Role::findOrFail($id);
-        $validationData = $request->validate([
-
-            'name' => 'required',
-        ]);
-        $role->update($request->only('name'));
+//        $validationData = $request->validate([
+//
+//            'name' => 'required',
+//        ]);
+//        $role->update($request->only('name'));
         $role->refreshPermissions($request->permissions);
         alert()->success('نقش با موفقیت ویرایش شد');
         return back();
@@ -121,8 +121,8 @@ class UserRoleController extends Controller
      */
     public function destroy($id)
     {
-        Role::findOrFail($id)->delete();
-        alert()->success('نقش با موفقیت حذف شد');
-        return back();
+//        Role::findOrFail($id)->delete();
+//        alert()->success('نقش با موفقیت حذف شد');
+//        return back();
     }
 }

@@ -1,6 +1,6 @@
 
 @extends('layouts.panel')
-@section('Colleges')
+@section("Colleges_$college->id")
     active
 @endsection
 @section('College')

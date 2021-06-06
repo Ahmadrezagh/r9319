@@ -7,9 +7,21 @@ use App\Models\College;
 use App\Models\Form;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FormController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if ((Auth::user()->isAdmin() && Auth::user()->can('Forms')) || Auth::user()->isSuperAdmin())
+            {
+                return $next($request);
+            }else{
+                abort(404);
+            }
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +57,8 @@ class FormController extends Controller
             'name' => 'required'
         ]);
         $form = Form::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'feds' => $request->feds ?? 0
         ]);
         if($request->lessons)
         {
@@ -109,7 +122,8 @@ class FormController extends Controller
             'name' => 'required'
         ]);
         $form->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'feds' => $request->feds ?? 0
         ]);
         if($request->lessons)
         {

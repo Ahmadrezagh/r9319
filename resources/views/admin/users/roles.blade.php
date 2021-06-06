@@ -165,7 +165,7 @@
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">نام</label>
-                                                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="نام نقش" required value="{{$role->name}}" required>
+                                                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="نام نقش" required value="{{$role->name}}" disabled>
                                                         </div>
                                                         <div class="row col-md-12">
                                                             <div class="form-check col-md-12">

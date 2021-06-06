@@ -80,7 +80,10 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" name="feds" value="1" class="custom-control-input" id="customCheck1" @if(isset($form) && $form->feds == 1) checked @endif >
+                                <label class="custom-control-label" for="customCheck1"  >بخش کل آموزش</label>
+                            </div>
                             <div id="row">
 
                                 @if(isset($form))

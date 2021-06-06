@@ -57,7 +57,7 @@
                                                     <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="نام درس" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="js-example-basic-multiple">استاد مربوطه</label>
+                                                    <label for="js-example-basic-multiple">دانشجو/فارغ التحصیل مربوطه</label>
                                                     <select class="js-example-basic-multiple form-control" name="students[]" multiple="multiple" required style="width: 100%;">
                                                         @foreach($students as $student)
                                                             <option value="{{$student->id}}" >{{$student->name}}</option>
@@ -157,7 +157,7 @@
                                                             <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="نام درس" required value="{{$lesson->name}}" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="js-example-basic-multiple">استاد مربوطه</label>
+                                                            <label for="js-example-basic-multiple">دانشجو/فارغ التحصیل مربوطه</label>
                                                             <select class="js-example-basic-multiple form-control" name="students[]" multiple="multiple" required style="width: 100%;" >
                                                                 @foreach($students as $student)
                                                                     <option value="{{$student->id}}"

@@ -45,6 +45,10 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Suggest tag -->
     <link rel="stylesheet" href="{{url('suggesttag/css/amsify.suggestags.css')}}">
+    <!-- Charting library -->
+    <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+    <!-- Chartisan -->
+    <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
 </head>
 <body style="font-family: IranYekan" class="hold-transition sidebar-mini layout-fixed">
 @include('sweet::alert')
@@ -278,7 +282,15 @@
                                         <p>دانشکده ها</p>
                                     </a>
                                 </li>
+                                @foreach(\App\Models\College::all() as $college)
+                                    <li class="nav-item">
+                                        <a href="{{route('colleges.show',$college->id)}}" class="nav-link @yield("Colleges_$college->id")">
+                                            <p>{{$college->name}}</p>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
+                        </li>
                         </li>
                     @endif
                     @if ((Auth::user()->isAdmin() && Auth::user()->can('Lesson')) || Auth::user()->isSuperAdmin() )
@@ -317,6 +329,11 @@
                                 <li class="nav-item">
                                     <a href="{{route('forms.index')}}" class="nav-link @yield('Forms')">
                                         <p>فرم های نظرسنجی</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('answers.index')}}" class="nav-link @yield('Answers')">
+                                        <p>تعریف پاسخ ها</p>
                                     </a>
                                 </li>
                             </ul>

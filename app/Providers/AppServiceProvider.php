@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Models\SettingGroup;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;use ConsoleTVs\Charts\Registrar as Charts;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Charts $charts)
     {
         //
 
@@ -34,5 +34,10 @@ class AppServiceProvider extends ServiceProvider
             $setting_groups = SettingGroup::all();
             View::share('setting_groups', $setting_groups);
         }
+        $charts->register([
+            \App\Charts\SampleChart::class,
+            \App\Charts\LessonChart::class,
+            \App\Charts\MasterChart::class,
+        ]);
     }
 }

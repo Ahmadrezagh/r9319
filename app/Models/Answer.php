@@ -9,13 +9,32 @@ class Answer extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name','value'
+    ];
+
     public function form()
     {
         return $this->belongsTo(Form::class);
     }
 
-    public function question()
+    public function lessons()
     {
-        return $this->belongsTo(Question::class);
+        return $this->morphedByMany(Lesson::class, 'answerable');
+    }
+
+    public function colleges()
+    {
+        return $this->morphedByMany(College::class, 'answerable');
+    }
+
+    public function allEducations()
+    {
+        return $this->morphedByMany(AllEducation::class, 'answerable');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answerable::class);
     }
 }
