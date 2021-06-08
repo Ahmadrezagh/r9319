@@ -105,7 +105,7 @@ class CollegeController extends Controller
             ->toJSON();
 
 
-        return view('admin.colleges.result',compact('college','chart','chart3'));
+        return view('admin.colleges.result',compact('college','chart'));
     }
 
     /**
