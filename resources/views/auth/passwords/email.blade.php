@@ -37,9 +37,6 @@
         <p class="mt-3 mb-1 text-right">
           <a href="/login">ورود</a>
         </p>
-        <p class="mb-0 text-right">
-          <a href="/register" class="text-center">ثبت نام در وبسایت</a>
-        </p>
       </div>
       <!-- /.login-card-body -->
     </div>

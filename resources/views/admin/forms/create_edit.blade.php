@@ -50,6 +50,8 @@
                                 <label for="exampleInputEmail1">دروس</label>
                                 <select class="js-example-basic-multiple form-control" name="lessons[]"
                                         multiple="multiple" style="width: 100%;">
+
+                                    <option value="-1">انتخاب همه</option>
                                     @foreach($lessons as $lesson)
                                         <option value="{{$lesson->id}}"
                                                 @if(isset($form) && $form->lessons)
@@ -64,9 +66,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">مراکز آموزشی</label>
+                                <label for="exampleInputEmail1">دانشکده ها</label>
                                 <select class="js-example-basic-multiple form-control" name="colleges[]"
                                         multiple="multiple" style="width: 100%;">
+                                    <option value="-1">انتخاب همه</option>
                                     @foreach($colleges as $college)
                                         <option value="{{$college->id}}"
                                                 @if(isset($form) && $form->colleges)
@@ -82,10 +85,9 @@
                             </div>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="feds" value="1" class="custom-control-input" id="customCheck1" @if(isset($form) && $form->feds == 1) checked @endif >
-                                <label class="custom-control-label" for="customCheck1"  >بخش کل آموزش</label>
+                                <label class="custom-control-label" for="customCheck1"  >واحد آموزش کل دانشگاه </label>
                             </div>
                             <div id="row">
-
                                 @if(isset($form))
                                     @php
                                     $c = 1;

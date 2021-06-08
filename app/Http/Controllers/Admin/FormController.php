@@ -62,13 +62,25 @@ class FormController extends Controller
         ]);
         if($request->lessons)
         {
-            $form->lessons()->sync($request->lessons);
+            if(in_array(-1,$request->lessons) )
+            {
+                $lessons = Lesson::query()->pluck('id')->toArray();
+                $form->lessons()->sync($lessons);
+            }else{
+                $form->lessons()->sync($request->lessons);
+            }
         }else{
             $form->lessons()->detach();
         }
         if($request->colleges)
         {
-            $form->colleges()->sync($request->colleges);
+            if(in_array(-1,$request->colleges) )
+            {
+                $colleges = College::query()->pluck('id')->toArray();
+                $form->colleges()->sync($colleges);
+            }else{
+                $form->colleges()->sync($request->colleges);
+            }
         }else{
             $form->colleges()->detach();
         }
@@ -127,13 +139,25 @@ class FormController extends Controller
         ]);
         if($request->lessons)
         {
-            $form->lessons()->sync($request->lessons);
+            if(in_array(-1,$request->lessons) )
+            {
+                $lessons = Lesson::query()->pluck('id')->toArray();
+                $form->lessons()->sync($lessons);
+            }else{
+                $form->lessons()->sync($request->lessons);
+            }
         }else{
             $form->lessons()->detach();
         }
         if($request->colleges)
         {
-            $form->colleges()->sync($request->colleges);
+            if(in_array(-1,$request->colleges) )
+            {
+                $colleges = College::query()->pluck('id')->toArray();
+                $form->colleges()->sync($colleges);
+            }else{
+                $form->colleges()->sync($request->colleges);
+            }
         }else{
             $form->colleges()->detach();
         }

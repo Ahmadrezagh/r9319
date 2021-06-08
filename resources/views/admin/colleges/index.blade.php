@@ -1,8 +1,5 @@
 
 @extends('layouts.panel')
-@section("Colleges_$college->id")
-    active
-@endsection
 @section('College')
     active
 @endsection

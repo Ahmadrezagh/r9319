@@ -43,7 +43,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::query()->where('type',1)->get();
         return view('admin.admins.create',compact('roles'));
     }
 

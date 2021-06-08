@@ -45,7 +45,7 @@
                             <div class="inner">
                                 <h3>{{Auth::user()->finishedStudents()->count()}}</h3>
 
-                                <p>دانشجویان فارغ التحصیل</p>
+                                <p>فارغ التحصیلان</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -93,6 +93,17 @@
                     <div class="card-body">
                         <div class="container">
                             <div  class="mt-3 mx-auto">
+                                <h5>میانگین نظرات کلیه نقش های دانشگاه</h5>
+                                <!-- Chart's container -->
+                                <div id="chart3" style="height: 300px;"></div>
+                                <!-- Your application script -->
+                                <script>
+                                    const chart3 = new Chartisan({
+                                        el: '#chart3',
+                                        data: {!! $chart3 !!},
+                                    });
+                                </script>
+                                <hr>
                                 <h5>میانگین نظرات دانشکده ها</h5>
                                 <!-- Chart's container -->
                                 <div id="chart" style="height: 300px;"></div>
@@ -104,16 +115,7 @@
                                     });
                                 </script>
                                 <hr>
-                                <h5>میانگین نظرات کلیه نقش های دانشگاه</h5>
-                                <!-- Chart's container -->
-                                <div id="chart3" style="height: 300px;"></div>
-                                <!-- Your application script -->
-                                <script>
-                                    const chart3 = new Chartisan({
-                                        el: '#chart3',
-                                        data: {!! $chart3 !!},
-                                    });
-                                </script>
+
                                 <h5>نظرسنجی دروس</h5>
                                 <!-- Chart's container -->
                                 <div id="lessons" style="height: 300px;"></div>
