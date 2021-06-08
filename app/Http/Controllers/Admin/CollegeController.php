@@ -87,7 +87,13 @@ class CollegeController extends Controller
                 ->where('answerable_id',$id)
                 ->where('answerable_type',get_class($college))
                 ->get();
-
+            if($role->name == 'کارمند بخش آموزش')
+            {
+                $answers = Answerable::query()->whereIn('user_id',$ids)
+                    ->where('answerable_id','1')
+                    ->where('answerable_type','App\Models\AllEducation')
+                    ->get();
+            }
             $v = 0;
             foreach ($answers as $answer)
             {
