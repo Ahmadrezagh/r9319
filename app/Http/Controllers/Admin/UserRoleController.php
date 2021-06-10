@@ -30,7 +30,7 @@ class UserRoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::query()->where('type',2)->get();
         $permissions = Permission::query()->where('type',2)->get();
         return view('admin.users.roles',compact('roles','permissions'));
 

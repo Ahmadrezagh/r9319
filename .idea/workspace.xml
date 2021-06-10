@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8da0b98c-c80f-4eac-9cdc-7cd7f3aa9162" name="Default Changelist" comment="" />
+    <list default="true" id="8da0b98c-c80f-4eac-9cdc-7cd7f3aa9162" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,7 +202,8 @@
       <workItem from="1623174270966" duration="9000" />
       <workItem from="1623250712683" duration="671000" />
       <workItem from="1623296564891" duration="829000" />
-      <workItem from="1623315482097" duration="305000" />
+      <workItem from="1623315482097" duration="406000" />
+      <workItem from="1623317159744" duration="54000" />
     </task>
     <servers />
   </component>
@@ -219,6 +223,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="320" y="115" key="#Deployment" timestamp="1623317178006">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="115" key="#Deployment/0.0.1440.900@0.0.1440.900" timestamp="1623317178006" />
     <state x="458" y="205" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1623015983044">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
