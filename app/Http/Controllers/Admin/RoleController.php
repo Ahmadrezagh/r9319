@@ -57,7 +57,6 @@ class RoleController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        dd(Permission::whereIn('name', $request->permissions )->pluck('id'));
         $role = new Role();
         try {
             $role->name = $request->name;

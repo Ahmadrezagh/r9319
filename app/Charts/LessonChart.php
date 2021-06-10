@@ -26,6 +26,10 @@ class LessonChart extends BaseChart
         {
             array_push($votes,$lesson->vote());
         }
+        foreach ($lessons_name as $key => $item)
+        {
+            $lessons_name[$key] = $lessons_name[$key]."(".$votes[$key].")";
+        }
         return Chartisan::build()
             ->labels($lessons_name)
             ->dataset('نتایج نظرسنجی دروس مختلف', $votes);

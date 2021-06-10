@@ -105,6 +105,10 @@ class CollegeController extends Controller
             }
             array_push($votes,$v);
         }
+        foreach ($roles_name as $key => $item)
+        {
+            $roles_name[$key] = $roles_name[$key]."(".$votes[$key].")";
+        }
         $chart = Chartisan::build()
             ->labels($roles_name)
             ->dataset('نظر سنجی دانشکده', $votes)

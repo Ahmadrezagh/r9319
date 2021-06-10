@@ -27,6 +27,10 @@ class MasterChart extends BaseChart
         {
             array_push($votes,$master->vote());
         }
+        foreach ($masters as $key => $item)
+        {
+            $masters_name[$key] = $masters_name[$key]."(".$votes[$key].")";
+        }
         return Chartisan::build()
             ->labels($masters_name)
             ->dataset('نظر سنجی اساتید', $votes);
