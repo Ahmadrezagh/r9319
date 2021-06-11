@@ -116,14 +116,14 @@
                                 </script>
                                 <hr>
 
-                                <h5>نظرسنجی دروس</h5>
-                                <!-- Chart's container -->
-                                <div id="lessons" style="height: 300px;"></div>
-                                <hr>
-                                <h5>نظرسنجی اساتید</h5>
-                                <!-- Chart's container -->
-                                <div id="masters" style="height: 300px;"></div>
-                                <hr>
+{{--                                <h5>نظرسنجی دروس</h5>--}}
+{{--                                <!-- Chart's container -->--}}
+{{--                                <div id="lessons" style="height: 300px;"></div>--}}
+{{--                                <hr>--}}
+{{--                                <h5>نظرسنجی اساتید</h5>--}}
+{{--                                <!-- Chart's container -->--}}
+{{--                                <div id="masters" style="height: 300px;"></div>--}}
+{{--                                <hr>--}}
 
                             </div>
                         </div>
