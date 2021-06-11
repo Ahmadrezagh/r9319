@@ -29,7 +29,7 @@ class MasterChart extends BaseChart
         }
         foreach ($masters as $key => $item)
         {
-            $masters_name[$key] = $masters_name[$key]."(".$votes[$key].")";
+            $masters_name[$key] = $masters_name[$key];
         }
         return Chartisan::build()
             ->labels($masters_name)

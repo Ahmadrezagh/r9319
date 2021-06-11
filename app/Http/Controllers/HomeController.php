@@ -46,7 +46,7 @@ class HomeController extends Controller
             }
             foreach ($colleges_name as $key => $item)
             {
-                $colleges_name[$key] = $colleges_name[$key]."(".$votes[$key].")";
+                $colleges_name[$key] = $colleges_name[$key];
             }
             $chart = Chartisan::build()
                 ->labels($colleges_name)
@@ -76,7 +76,7 @@ class HomeController extends Controller
                 array_push($votes,$v);
             }
             foreach ($roles_name as $key => $item){
-                $roles_name[$key] = $roles_name[$key]."(".$votes[$key].")";
+                $roles_name[$key] = $roles_name[$key];
             }
             $chart3 = Chartisan::build()
                 ->labels($roles_name)

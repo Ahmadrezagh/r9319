@@ -284,7 +284,7 @@
                                 </li>
                                 @foreach(\App\Models\College::all() as $college)
                                     <li class="nav-item">
-                                        <a href="{{route('colleges.show',$college->id)}}" class="nav-link @yield("Colleges_$college->id")">
+                                        <a href="{{route('colleges.show',$college->id)}}" class="nav-link @yield("xr ")">
                                             <p>{{$college->name}}</p>
                                         </a>
                                     </li>
@@ -339,26 +339,26 @@
                             </ul>
                         </li>
                     @endif
-                    @if ((Auth::user()->isAdmin() && Auth::user()->can('Setting')) || Auth::user()->isSuperAdmin() )
-                                            <li class="nav-item has-treeview ">
-                                                <a href="#" class="nav-link @yield('Setting')">
-                                                    <i class="fas fa-cogs"></i>
-                                                    <p>
-                                                        تنظیمات
-                                                        <i class="right fas fa-angle-left"></i>
-                                                    </p>
-                                                </a>
-                                                <ul class="nav nav-treeview">
-                                                    @foreach($setting_groups as $group)
-                                                        <li class="nav-item">
-                                                            <a href="{{route('settings.show',$group->id)}}" class="nav-link @yield($group->name)">
-                                                                <p>{{$group->name}}</p>
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        @endif
+{{--                    @if ((Auth::user()->isAdmin() && Auth::user()->can('Setting')) || Auth::user()->isSuperAdmin() )--}}
+{{--                                            <li class="nav-item has-treeview ">--}}
+{{--                                                <a href="#" class="nav-link @yield('Setting')">--}}
+{{--                                                    <i class="fas fa-cogs"></i>--}}
+{{--                                                    <p>--}}
+{{--                                                        تنظیمات--}}
+{{--                                                        <i class="right fas fa-angle-left"></i>--}}
+{{--                                                    </p>--}}
+{{--                                                </a>--}}
+{{--                                                <ul class="nav nav-treeview">--}}
+{{--                                                    @foreach($setting_groups as $group)--}}
+{{--                                                        <li class="nav-item">--}}
+{{--                                                            <a href="{{route('settings.show',$group->id)}}" class="nav-link @yield($group->name)">--}}
+{{--                                                                <p>{{$group->name}}</p>--}}
+{{--                                                            </a>--}}
+{{--                                                        </li>--}}
+{{--                                                    @endforeach--}}
+{{--                                                </ul>--}}
+{{--                                            </li>--}}
+{{--                                        @endif--}}
                                         <li >
                                             <a class="nav-link btn btn-danger" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();

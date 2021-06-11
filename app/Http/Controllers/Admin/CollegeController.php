@@ -107,7 +107,7 @@ class CollegeController extends Controller
         }
         foreach ($roles_name as $key => $item)
         {
-            $roles_name[$key] = $roles_name[$key]."(".$votes[$key].")";
+            $roles_name[$key] = $roles_name[$key];
         }
         $chart = Chartisan::build()
             ->labels($roles_name)

@@ -28,7 +28,7 @@ class LessonChart extends BaseChart
         }
         foreach ($lessons_name as $key => $item)
         {
-            $lessons_name[$key] = $lessons_name[$key]."(".$votes[$key].")";
+            $lessons_name[$key] = $lessons_name[$key];
         }
         return Chartisan::build()
             ->labels($lessons_name)
